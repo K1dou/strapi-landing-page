@@ -13,16 +13,15 @@ export interface SectionImageGrid extends Struct.ComponentSchema {
 export interface SectionSectionGrid extends Struct.ComponentSchema {
   collectionName: 'components_section_section_grids';
   info: {
+    description: '';
     displayName: 'section_grid';
   };
   attributes: {
     description: Schema.Attribute.Text & Schema.Attribute.Required;
-    image_grid: Schema.Attribute.Component<'section.image-grid', true> &
-      Schema.Attribute.Required;
+    image_grid: Schema.Attribute.Component<'section.image-grid', true>;
     metada: Schema.Attribute.Component<'section.section-metadata', false> &
       Schema.Attribute.Required;
-    text_grid: Schema.Attribute.Component<'section.text-grid', true> &
-      Schema.Attribute.Required;
+    text_grid: Schema.Attribute.Component<'section.text-grid', true>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }

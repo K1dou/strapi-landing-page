@@ -1,5 +1,32 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SectionImageGrid extends Struct.ComponentSchema {
+  collectionName: 'components_section_image_grids';
+  info: {
+    displayName: 'image-grid';
+  };
+  attributes: {
+    image: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+  };
+}
+
+export interface SectionSectionGrid extends Struct.ComponentSchema {
+  collectionName: 'components_section_section_grids';
+  info: {
+    displayName: 'section_grid';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    image_grid: Schema.Attribute.Component<'section.image-grid', true> &
+      Schema.Attribute.Required;
+    metada: Schema.Attribute.Component<'section.section-metadata', false> &
+      Schema.Attribute.Required;
+    text_grid: Schema.Attribute.Component<'section.text-grid', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SectionSectionMetadata extends Struct.ComponentSchema {
   collectionName: 'components_section_section_metadata';
   info: {
@@ -21,6 +48,38 @@ export interface SectionSectionMetadata extends Struct.ComponentSchema {
         maxLength: 50;
         minLength: 3;
       }>;
+  };
+}
+
+export interface SectionSectionTwoColumns extends Struct.ComponentSchema {
+  collectionName: 'components_section_section_two_columns';
+  info: {
+    description: '';
+    displayName: 'section_two_columns';
+    icon: 'user';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Private;
+    metadata: Schema.Attribute.Component<'section.section-metadata', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+        minLength: 3;
+      }>;
+  };
+}
+
+export interface SectionTextGrid extends Struct.ComponentSchema {
+  collectionName: 'components_section_text_grids';
+  info: {
+    displayName: 'text-grid';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -89,7 +148,11 @@ export interface SharedSlider extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'section.image-grid': SectionImageGrid;
+      'section.section-grid': SectionSectionGrid;
       'section.section-metadata': SectionSectionMetadata;
+      'section.section-two-columns': SectionSectionTwoColumns;
+      'section.text-grid': SectionTextGrid;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

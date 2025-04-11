@@ -31,6 +31,10 @@
         "section.section-content"
       ],
       "required": true
+    },
+    "footer_text": {
+      "type": "blocks",
+      "required": true
     }
   }
 }
